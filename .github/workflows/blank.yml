@@ -6,6 +6,9 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  id-token: write  # Grant write permissions for the id-token
+
 jobs:
   build:
     runs-on: ubuntu-latest
