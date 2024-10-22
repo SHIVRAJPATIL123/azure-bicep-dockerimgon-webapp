@@ -1,0 +1,22 @@
+{
+    "dockerImage": {
+      "value": "nginx"
+    },
+    "webAppName": {
+      "value": "webapp646"
+    },
+   
+    "location": {
+      "value": "Canada Central"
+    },
+    "sku": {
+      "value": "F1"
+    },
+    "servicePlanName":{
+        "value":"sp-webapp646"
+    },
+    "dockerImageTag":{
+        "value":"latest"
+    }
+  }
+  
