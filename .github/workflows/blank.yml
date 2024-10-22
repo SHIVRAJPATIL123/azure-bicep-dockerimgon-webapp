@@ -1,43 +1,32 @@
-# Workflow to deploy Azure Bicep templates
 name: Azure Bicep Deployment
 
-# Trigger the workflow on push events to the main branch
 on:
   push:
     branches: [ "main" ]
-
-permissions:
-  id-token: write  # Grant write permissions for the id-token
-
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Log in to Azure using service principal
       - name: Login with Azure
         uses: azure/login@v1
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'  # Use the secret you just created
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'  # Ensure this is valid JSON
 
-      # Step 3: Install Bicep CLI
       - name: Install Bicep CLI
         run: |
           curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
           chmod +x ./bicep
           sudo mv ./bicep /usr/local/bin/bicep
 
-      # Step 4: Create resource group (optional, in case it doesn't exist)
       - name: Create Azure resource group
         run: |
           az group create --name bicep1 --location "Canada Central"
 
-      # Step 5: Deploy the Bicep template
       - name: Deploy Bicep Template
         run: |
           az deployment group create \
